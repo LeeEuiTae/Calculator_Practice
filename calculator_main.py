@@ -72,14 +72,16 @@ class Main(QDialog):
         ### 각 숫자 버튼을 클릭했을 때, 숫자가 수식창에 입력 될 수 있도록 시그널 설정
         ### 각 숫자 버튼들의 옆에 x, -, +, =, +/- 연산 기호 위젯 생성
         number_button_dict = {}
-        for number in range(0, 10):
+        row_order = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0]
+
+        for i, number in enumerate(row_order):
             number_button_dict[number] = QPushButton(str(number))
-            number_button_dict[number].clicked.connect(lambda state, num = number:
+            number_button_dict[number].clicked.connect(lambda state, num=number:
                                                        self.number_button_clicked(num))
-            if number >0:
-                x,y = divmod(number-1, 3)
+            if number > 0:
+                x, y = divmod(i, 3)
                 layout_line3.addWidget(number_button_dict[number], x, y)
-            elif number==0:
+            elif number == 0:
                 layout_line3.addWidget(number_button_dict[number], 3, 1)
 
         ### x, -, +, = 기호 윈도우 계산기에 맞게 자리 배치
